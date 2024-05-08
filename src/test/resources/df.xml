@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE dependencies SYSTEM "http://depfind.sourceforge.net/dtd/dependencies.dtd">
+
+<dependencies>
+    <package confirmed="yes">
+        <name>ch.com</name>
+        <class confirmed="yes">
+            <name>ch.com.Main</name>
+            <outbound type="class" confirmed="no">java.lang.Object</outbound>
+            <feature confirmed="yes">
+                <name>ch.com.Main.Main()</name>
+                <outbound type="feature" confirmed="no">java.lang.Object.Object()</outbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.Main.getClassName()</name>
+                <outbound type="class" confirmed="no">java.lang.String</outbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.Main.main(java.lang.String[])</name>
+                <outbound type="feature" confirmed="yes">ch.com.Proxy.Proxy()</outbound>
+                <outbound type="feature" confirmed="yes">ch.com.Proxy.doSomethingElse()</outbound>
+                <outbound type="feature" confirmed="yes">ch.com.SomeClass.someFunction()</outbound>
+                <outbound type="class" confirmed="no">java.lang.String</outbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.Main.test()</name>
+                <outbound type="feature" confirmed="yes">ch.com.SomeClass.someFunction()</outbound>
+            </feature>
+        </class>
+        <class confirmed="yes">
+            <name>ch.com.Proxy</name>
+            <outbound type="class" confirmed="no">java.lang.Object</outbound>
+            <feature confirmed="yes">
+                <name>ch.com.Proxy.Proxy()</name>
+                <outbound type="feature" confirmed="no">java.lang.Object.Object()</outbound>
+                <inbound type="feature" confirmed="yes">ch.com.Main.main(java.lang.String[])</inbound>
+                <inbound type="feature" confirmed="yes">ch.com.SomeClass.someFunction()</inbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.Proxy.doSomethingElse()</name>
+                <outbound type="feature" confirmed="yes">ch.com.Utils.Utils()</outbound>
+                <outbound type="feature" confirmed="yes">ch.com.Utils.doSomething()</outbound>
+                <inbound type="feature" confirmed="yes">ch.com.Main.main(java.lang.String[])</inbound>
+                <inbound type="feature" confirmed="yes">ch.com.SomeClass.someFunction()</inbound>
+            </feature>
+        </class>
+        <class confirmed="yes">
+            <name>ch.com.SomeClass</name>
+            <outbound type="class" confirmed="no">java.lang.Object</outbound>
+            <feature confirmed="yes">
+                <name>ch.com.SomeClass.SomeClass()</name>
+                <outbound type="feature" confirmed="no">java.lang.Object.Object()</outbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.SomeClass.someFunction()</name>
+                <outbound type="feature" confirmed="yes">ch.com.Proxy.Proxy()</outbound>
+                <outbound type="feature" confirmed="yes">ch.com.Proxy.doSomethingElse()</outbound>
+                <inbound type="feature" confirmed="yes">ch.com.Main.main(java.lang.String[])</inbound>
+                <inbound type="feature" confirmed="yes">ch.com.Main.test()</inbound>
+            </feature>
+        </class>
+        <class confirmed="yes">
+            <name>ch.com.Utils</name>
+            <outbound type="class" confirmed="no">java.lang.Object</outbound>
+            <feature confirmed="yes">
+                <name>ch.com.Utils.ID</name>
+                <outbound type="class" confirmed="no">java.math.BigInteger</outbound>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.Utils.SQL</name>
+                <outbound type="class" confirmed="no">java.lang.String</outbound>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.doSomething()</inbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.Utils.Utils()</name>
+                <outbound type="feature" confirmed="yes">ch.com.Utils.ID</outbound>
+                <outbound type="feature" confirmed="yes">ch.com.Utils.SQL</outbound>
+                <outbound type="class" confirmed="no">java.lang.Object</outbound>
+                <outbound type="feature" confirmed="no">java.lang.Object.Object()</outbound>
+                <outbound type="class" confirmed="no">java.lang.String</outbound>
+                <outbound type="class" confirmed="no">java.lang.StringBuilder</outbound>
+                <outbound type="feature" confirmed="no">java.lang.StringBuilder.StringBuilder()</outbound>
+                <outbound type="feature" confirmed="no">java.lang.StringBuilder.append(java.lang.Object)</outbound>
+                <outbound type="feature" confirmed="no">java.lang.StringBuilder.append(java.lang.String)</outbound>
+                <outbound type="feature" confirmed="no">java.lang.StringBuilder.toString()</outbound>
+                <outbound type="class" confirmed="no">java.math.BigInteger</outbound>
+                <outbound type="feature" confirmed="no">java.math.BigInteger.BigInteger(java.lang.String)</outbound>
+                <inbound type="feature" confirmed="yes">ch.com.Proxy.doSomethingElse()</inbound>
+            </feature>
+            <feature confirmed="yes">
+                <name>ch.com.Utils.doSomething()</name>
+                <outbound type="feature" confirmed="yes">ch.com.Utils.SQL</outbound>
+                <outbound type="class" confirmed="no">java.io.PrintStream</outbound>
+                <outbound type="feature" confirmed="no">java.io.PrintStream.print(java.lang.String)</outbound>
+                <outbound type="class" confirmed="no">java.lang.String</outbound>
+                <outbound type="feature" confirmed="no">java.lang.System.out</outbound>
+                <inbound type="feature" confirmed="yes">ch.com.Proxy.doSomethingElse()</inbound>
+            </feature>
+        </class>
+    </package>
+    <package confirmed="no">
+        <name>java.io</name>
+        <class confirmed="no">
+            <name>java.io.PrintStream</name>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.doSomething()</inbound>
+            <feature confirmed="no">
+                <name>java.io.PrintStream.print(java.lang.String)</name>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.doSomething()</inbound>
+            </feature>
+        </class>
+    </package>
+    <package confirmed="no">
+        <name>java.lang</name>
+        <class confirmed="no">
+            <name>java.lang.Object</name>
+            <inbound type="class" confirmed="yes">ch.com.Main</inbound>
+            <inbound type="class" confirmed="yes">ch.com.Proxy</inbound>
+            <inbound type="class" confirmed="yes">ch.com.SomeClass</inbound>
+            <inbound type="class" confirmed="yes">ch.com.Utils</inbound>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            <feature confirmed="no">
+                <name>java.lang.Object.Object()</name>
+                <inbound type="feature" confirmed="yes">ch.com.Main.Main()</inbound>
+                <inbound type="feature" confirmed="yes">ch.com.Proxy.Proxy()</inbound>
+                <inbound type="feature" confirmed="yes">ch.com.SomeClass.SomeClass()</inbound>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            </feature>
+        </class>
+        <class confirmed="no">
+            <name>java.lang.String</name>
+            <inbound type="feature" confirmed="yes">ch.com.Main.getClassName()</inbound>
+            <inbound type="feature" confirmed="yes">ch.com.Main.main(java.lang.String[])</inbound>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.SQL</inbound>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.doSomething()</inbound>
+        </class>
+        <class confirmed="no">
+            <name>java.lang.StringBuilder</name>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            <feature confirmed="no">
+                <name>java.lang.StringBuilder.StringBuilder()</name>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            </feature>
+            <feature confirmed="no">
+                <name>java.lang.StringBuilder.append(java.lang.Object)</name>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            </feature>
+            <feature confirmed="no">
+                <name>java.lang.StringBuilder.append(java.lang.String)</name>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            </feature>
+            <feature confirmed="no">
+                <name>java.lang.StringBuilder.toString()</name>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            </feature>
+        </class>
+        <class confirmed="no">
+            <name>java.lang.System</name>
+            <feature confirmed="no">
+                <name>java.lang.System.out</name>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.doSomething()</inbound>
+            </feature>
+        </class>
+    </package>
+    <package confirmed="no">
+        <name>java.math</name>
+        <class confirmed="no">
+            <name>java.math.BigInteger</name>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.ID</inbound>
+            <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            <feature confirmed="no">
+                <name>java.math.BigInteger.BigInteger(java.lang.String)</name>
+                <inbound type="feature" confirmed="yes">ch.com.Utils.Utils()</inbound>
+            </feature>
+        </class>
+    </package>
+</dependencies>
